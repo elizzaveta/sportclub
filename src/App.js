@@ -14,6 +14,8 @@ import EditSubscription from "./components/administration/subscription/EditSubsc
 import AdministrationHome from "./components/administration/home/AdministrationHome";
 import Login from "./components/login/Login";
 import useToken from "./useToken";
+import Registration from "./components/registration/Registration";
+import Logout from "./components/logout/Logout";
 
 function clearToken() {
     localStorage.removeItem('token');
@@ -38,6 +40,8 @@ function App() {
                 <Route path="/administration/edit-subscription" element={token ? <EditSubscription/> : <Login setToken={setToken}/>}/>
                 <Route path="/administration" element={token ? <AdministrationHome/> : <Login setToken={setToken}/>}/>
                 <Route path="/login" element={<Login setToken={setToken}/>}/>
+                <Route path="/sign-up" element={<Registration setToken={setToken}/>}/>
+                <Route path="/logout" element={<Logout/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>

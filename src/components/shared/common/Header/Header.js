@@ -24,10 +24,24 @@ function DesktopHeader(){
                     </nav>
                 </div>
 
-                <Link to="/login" className="link-router link-blue">Log in</Link>
+                <DesktopHeaderLoginControls/>
+
+
             </div>
         </header>
     )
+}
+
+function DesktopHeaderLoginControls() {
+    if (localStorage.getItem('token')) {
+        return  <Link to="/logout" className="link-router link-blue">Log out</Link>
+    } else {
+        return <div className="right">
+
+            <Link to="/login" className="link-router link-blue">Log in</Link>
+            <Link to="/sign-up" className="link-router link-blue">Sign up</Link>
+        </div>
+    }
 }
 
 function MobileHeader(){
