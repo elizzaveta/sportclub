@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {API} from "../../index";
+import {useNavigate} from "react-router-dom";
 
 async function loginUser(credentials) {
     return fetch(API + 'login', {
@@ -17,6 +18,8 @@ export default function Login({ setToken }) {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
+    const navigate = useNavigate();
+
     const handleSubmit = async e => {
         e.preventDefault();
         const token = await loginUser({
@@ -24,6 +27,7 @@ export default function Login({ setToken }) {
             password
         });
         setToken(token);
+        navigate("/");
     }
 
     return(

@@ -22,7 +22,7 @@ export default function Registration({ setToken }) {
     const [birthday, setBirthday] = useState();
     const [password, setPassword] = useState();
 
-    const naviagte = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -35,7 +35,7 @@ export default function Registration({ setToken }) {
             password
         });
         setToken(token);
-        naviagte("/")
+        navigate("/")
     }
 
     return(

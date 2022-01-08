@@ -22,7 +22,7 @@ function clearToken() {
 }
 
 function App() {
-    const { token, setToken } = useToken();
+    const { token, setToken, removeToken } = useToken();
 
     //if(!token) {
      //   return <Login setToken={setToken} />
@@ -41,7 +41,7 @@ function App() {
                 <Route path="/administration" element={token ? <AdministrationHome/> : <Login setToken={setToken}/>}/>
                 <Route path="/login" element={<Login setToken={setToken}/>}/>
                 <Route path="/sign-up" element={<Registration setToken={setToken}/>}/>
-                <Route path="/logout" element={<Logout/>}/>
+                <Route path="/logout" element={<Logout removeToken={removeToken}/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>
