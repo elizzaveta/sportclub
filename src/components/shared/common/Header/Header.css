@@ -1,0 +1,82 @@
+.h-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.logo{
+    background-image: url("../../../../images/logo.png");
+    margin-right: 17px;
+    background-size: cover;
+}
+.company-name{
+    margin-right: 54px;
+    color: rgb(142, 172, 207);
+    font-family: Work Sans;
+
+}
+
+.links{
+    font-size: 16px;
+    width: 286px;
+    display: flex;
+    justify-content: space-between;
+}
+.left{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu{
+    cursor: pointer;
+}
+.menu-details{
+    background: rgb(151, 156, 191);
+    position: absolute;
+    z-index: 50;
+    left: 50%;
+    width: 50%;
+    color: rgb(49, 51, 62);
+    display: flex;
+    flex-direction: column;
+}
+.menu-shaddow{
+    background: rgba(0, 0, 0, 0.57);
+    position: absolute;
+    z-index: 49;
+    width: 100%;
+    left: 0;
+
+}
+.links-in-menu{
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media (max-width: 790px) {
+    .company-name{
+        font-size: 16px;
+    }
+    .logo{
+        height: 25px;
+        width: 42px;
+    }
+    .menu-details, .menu-shadow{
+        top: 49px;
+        height: 510px;
+    }
+}
+@media (min-width: 790px){
+    .company-name{
+        font-size: 24px;
+    }
+    .logo{
+        height: 35px;
+        width: 60px;
+    }
+    .menu-details,.menu-shaddow{
+        top: 60px;
+        height: 765px;
+    }
+}

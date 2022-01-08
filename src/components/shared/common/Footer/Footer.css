@@ -1,0 +1,12 @@
+.f-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.f-links{
+    list-style-type: none;
+    padding: 0;
+}
+.f-links li{
+    margin-bottom: 26px;
+}
