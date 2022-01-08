@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {API} from "../../index";
 import {useNavigate} from "react-router-dom";
+import "./Login.css"
 
 async function loginUser(credentials) {
     return fetch(API + 'login', {
@@ -46,14 +47,14 @@ export default function Login({ setToken }) {
             <form onSubmit={handleSubmit}>
                 <label>
                     <p>Email</p>
-                    <input type="text" onChange={e => setEmail(e.target.value)} />
+                    <input className="login-input" type="text" onChange={e => setEmail(e.target.value)} />
                 </label>
                 <label>
                     <p>Password</p>
-                    <input type="password" onChange={e => setPassword(e.target.value)}/>
+                    <input  className="login-input" type="password" onChange={e => setPassword(e.target.value)}/>
                 </label>
                 <div>
-                    <button type="submit">Submit</button>
+                    <button className="green-max-width-button" type="submit">Submit</button>
                 </div>
             </form>
         </div>
