@@ -16,6 +16,7 @@ import Login from "./components/login/Login";
 import useToken from "./useToken";
 import Registration from "./components/registration/Registration";
 import Logout from "./components/logout/Logout";
+import jwtDecode from "jwt-decode";
 
 function clearToken() {
     localStorage.removeItem('token');
@@ -24,21 +25,17 @@ function clearToken() {
 function App() {
     const { token, setToken, removeToken } = useToken();
 
-    //if(!token) {
-     //   return <Login setToken={setToken} />
-    //}
-
-    // rendering the login page instead of
+    const isAdmin = token ? jwtDecode(token).role === 'ADMIN' : false;
 
     return (
         <BrowserRouter>
-            <Header/>
+            <Header isLoggedIn={!!token} isAdmin={isAdmin}/>
             <Routes>
                 <Route path="/" element={<Landing/>}/>
                 <Route path="/subscription" element={<Subscription/>}/>
                 <Route path="/my-subscription" element={token ? <PersonalSubscription token={token}/> : <Login setToken={setToken}/>}/>
-                <Route path="/administration/edit-subscription" element={token ? <EditSubscription/> : <Login setToken={setToken}/>}/>
-                <Route path="/administration" element={token ? <AdministrationHome/> : <Login setToken={setToken}/>}/>
+                <Route path="/administration/edit-subscription" element={isAdmin ? <EditSubscription/> : 'You must be an admin to do that'}/>
+                <Route path="/administration" element={isAdmin ? <AdministrationHome/> : 'You must be an admin to do that'}/>
                 <Route path="/login" element={<Login setToken={setToken}/>}/>
                 <Route path="/sign-up" element={<Registration setToken={setToken}/>}/>
                 <Route path="/logout" element={<Logout removeToken={removeToken}/>}/>

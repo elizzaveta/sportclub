@@ -10,8 +10,13 @@ async function loginUser(credentials) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(credentials)
-    })
-        .then(data => data.text())
+    }).then(response => {
+        if (response.status >= 200 && response.status < 300) {
+            return Promise.resolve(response)
+        } else {
+            return Promise.reject(new Error(response.statusText))
+        }
+    }).then(data => data.text())
 }
 
 export default function Login({ setToken }) {
@@ -22,11 +27,16 @@ export default function Login({ setToken }) {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const token = await loginUser({
-            email,
-            password
-        });
-        setToken(token);
+        try {
+            const token = await loginUser({
+                email,
+                password
+            });
+
+            setToken(token);
+        } catch (e) {
+            console.log('error wrong credentials');
+        }
         navigate("/");
     }
 
