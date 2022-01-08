@@ -1,7 +1,26 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./PersonalSubscription.css"
+import {API} from "../../../index";
 
-export default function PersonalSubscription(){
+export default function PersonalSubscription({ token }) {
+
+    const [subscription, setSubscription] = useState(null)
+
+    useEffect(() => {
+        fetch(API + 'user-subscriptions', {
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': `Bearer ${token}`,
+            }
+        })
+            .then(status)
+            .then(json)
+            .then(response => {
+                setSubscription(response)
+                console.log(response)
+            });
+    }, [])
 
     let content =
         <div className="content-wrapper">
@@ -23,4 +42,17 @@ export default function PersonalSubscription(){
     return(
         <div>{content}</div>
     )
+}
+
+// i just copypasted it here
+function status(response) {
+    if (response.status >= 200 && response.status < 300) {
+        return Promise.resolve(response)
+    } else {
+        return Promise.reject(new Error(response.statusText))
+    }
+}
+
+function json(response) {
+    return response.json()
 }
