@@ -24,7 +24,7 @@ function DesktopHeader(){
                     </nav>
                 </div>
 
-                <div className="log-in">Log in</div>
+                <Link to="/login" className="link-router link-blue">Log in</Link>
             </div>
         </header>
     )
