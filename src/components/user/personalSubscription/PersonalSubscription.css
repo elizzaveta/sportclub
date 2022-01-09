@@ -8,3 +8,13 @@
     background: #E4FAEB;
     padding: 30px;
 }
+
+.user-details-block {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background: #e4faf7;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
