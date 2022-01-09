@@ -30,18 +30,7 @@ export default function MarkUserVisit({token}) {
             });
     }, [token, userId])
 
-    const handleTakeOneVisitClick = ()=>{
-        fetch(API + 'user-user-subscriptions/visit/' + userId, {
-            mode: 'cors',
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            }
-        })
-            .then(status)
-            .then(json);
-        alert("Visit is marked!")
-        //window.location.pathname='/manage-user/'+userId;
-    }
+
 
     let content = (userSubscription.loading)
         ? <p>Loading</p>
@@ -57,6 +46,7 @@ export default function MarkUserVisit({token}) {
                         <div className="user-subscription-block">
                             <h3>Subscription:</h3>
                             <p>Category: {subscriptionItem.subscription.category.name}</p>
+                            <p>Category: {subscriptionItem.id}</p>
                             <p>Validity: {subscriptionItem.subscription.monthsDuration} month</p>
                             <p>Visits: {subscriptionItem.subscription.visitsNumber} visits</p>
                             <p>Start date: {subscriptionItem.startTime}</p>
@@ -67,7 +57,7 @@ export default function MarkUserVisit({token}) {
                         </div>
                     </div>
                     <div>
-                        <button className="take-one-visit-button" onClick={handleTakeOneVisitClick}>Take one visit</button>
+                        <button  className="take-one-visit-button" onClick={()=>handleTakeOneVisitClick(subscriptionItem.id, userId)}>Take one visit</button>
                     </div>
                 </div>
             )}
@@ -91,3 +81,16 @@ function json(response) {
     return response.json()
 }
 
+
+function handleTakeOneVisitClick(id, userId){
+    alert(id)
+    fetch(API + 'user-subscriptions/visit/' + id, {
+        mode: 'cors',
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        }
+    })
+        .then(status)
+        .then(json);
+    window.location.pathname='/administration/manage-user/'+userId;
+}
