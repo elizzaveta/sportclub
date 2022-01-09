@@ -36,7 +36,7 @@ export default function EditUserSubscription({ token }) {
         :
         <div>
             <h2>User Active Subscription(s):</h2>
-            {userSubscription.subscription.map(subscriptionItem =>
+            {userSubscription.subscription.filter(item => item.visitsNumber > 0).map(subscriptionItem =>
                 <div>
                     <div className="user-subscription-block">
                         <h3>Subscription:</h3>

@@ -83,7 +83,7 @@ function json(response) {
 
 
 function handleTakeOneVisitClick(id, userId){
-    alert(id)
+    // alert(id)
     fetch(API + 'user-subscriptions/visit/' + id, {
         mode: 'cors',
         headers: {
