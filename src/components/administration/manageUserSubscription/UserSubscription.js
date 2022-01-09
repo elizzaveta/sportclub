@@ -1,36 +1,55 @@
 import React, {useState, useEffect} from "react";
 import "./ManageUser.css"
 import {API} from "../../../index";
+import subscription from "../../shared/subscription/Subscription";
 
 
-export default function UserSubscription({userId}) {
+export default function UserSubscription({userId, token}) {
     const [userSubscription, setUserSubscription] = useState({
-        subscription: null,
+        subscription: [],
         loading: true
     })
 
-    // !!
-    // here will be getting user active subscriptions by id
+    useEffect(() => {
+        fetch(API + 'user-subscriptions/' + userId, {
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': `Bearer ${token}`,
+            }
+        })
+            .then(status)
+            .then(json)
+            .then(response => {
+                setUserSubscription({
+                    subscription: response,
+                    loading: false
+                })
+                console.log(response)
+            });
+    }, [token, userId])
 
-    // make dynamic after implementing fetch
-    let content = (false)
-        ? <h2>Loading</h2>
+    let content = (userSubscription.loading)
+        ? <p>Loading</p>
         :
-        <div >
+        <div>
             <h2>User Active Subscription(s):</h2>
-            <div className="user-subscription-block">
-                <h3>Subscription:</h3>
-                <p>Category: Individual training</p>
-                <p>Validity: 1 month</p>
-                <p>Visits: 12 visits</p>
-                <p>Start date: 01/01/2022</p>
-            </div>
-            <div className="left-user-subscription-block">
-                <h3>Left visits: 5</h3>
-                <h3>Expires on: 01/02/2022</h3>
-            </div>
+            {userSubscription.subscription.map(subscriptionItem =>
+                <div>
+                    <div className="user-subscription-block">
+                        <h3>Subscription:</h3>
+                        <p>Category: {subscriptionItem.subscription.category.name}</p>
+                        <p>Validity: {subscriptionItem.subscription.monthsDuration} month</p>
+                        <p>Visits: {subscriptionItem.subscription.visitsNumber} visits</p>
+                        <p>Start date: {subscriptionItem.startTime}</p>
+                    </div>
+                    <div className="left-user-subscription-block">
+                        <h3>Left visits: {subscriptionItem.visitsNumber}</h3>
+                        <h3>Expires on: {subscriptionItem.endTime}</h3>
+                    </div>
+                </div>
+            )}
         </div>
-
 
     return (
         <div>{content}</div>

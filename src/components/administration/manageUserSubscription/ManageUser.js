@@ -9,7 +9,7 @@ export default function ManageUser({token}) {
     return (
         <div className="content-wrapper">
             <h1 className="center">Manage user</h1>
-            <ManageOptions/>
+            <ManageOptions userId ={userId}/>
             <UserInfo userId ={userId} token={token}/>
             <UserSubscription  userId ={userId} token={token}/>
         </div>
