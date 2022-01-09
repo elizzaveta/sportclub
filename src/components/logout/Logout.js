@@ -5,4 +5,5 @@ export default function Logout({ removeToken }) {
     // removeToken(); that fails
     const nav = useNavigate();
     nav('/');
+    return <div className="content-wrapper">You have logged out successfully</div>;
 }
