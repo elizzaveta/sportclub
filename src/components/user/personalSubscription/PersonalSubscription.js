@@ -7,7 +7,7 @@ export default function PersonalSubscription({token}) {
     const [subscription, setSubscription] = useState(null)
 
     useEffect(() => {
-        fetch(API + 'user-subscriptions', {
+        fetch(API + 'my-subscriptions', {
             mode: 'cors',
             headers: {
                 'Access-Control-Allow-Origin': '*',

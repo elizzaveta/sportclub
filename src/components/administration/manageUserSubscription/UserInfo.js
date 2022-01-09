@@ -1,45 +1,41 @@
 import React, {useState, useEffect} from "react";
 import {API} from "../../../index";
 
-export default function UserInfo({userId}) {
+export default function UserInfo({userId, token}) {
     const [userInfo, setUserInfo] = useState({
         info: null,
         loading: true
     })
 
-    // !!
-    // here will be getting user info (first name, etc )
+    useEffect(() => {
+        fetch(API + 'users/'+userId, {
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': `Bearer ${token}`,
+            }
+        })
+            .then(status)
+            .then(json)
+            .then(response => {
+                setUserInfo({
+                    info: response,
+                    loading: false
+                })
+                console.log(response)
+            });
+    }, [token, userId])
 
-    // useEffect(() => {
-    //     fetch(API + 'user-subscriptions', {
-    //         mode: 'cors',
-    //         headers: {
-    //             'Access-Control-Allow-Origin': '*',
-    //             'Authorization': `Bearer ${token}`,
-    //         }
-    //     })
-    //         .then(status)
-    //         .then(json)
-    //         .then(response => {
-    //             setUserInfo({
-    //                 info: response,
-    //                 loading: false
-    //             })
-    //             console.log(response)
-    //         });
-    // }, [token])
-
-    // make dynamic after implementing fetch
-    let content = (false)
+    let content = (userInfo.loading)
         ? <h2>Loading</h2>
         :
         <div >
             <h2>User Info:</h2>
-            <p>First name: {'David'}</p>
-            <p>Last name: {'Smith'}</p>
-            <p>Phone Number: {'phone'}</p>
-            <p>Birthday: {'b-day'}</p>
-            <p>Email: {'email'}</p>
+            <p>First name: {userInfo.info.firstName}</p>
+            <p>Last name: {userInfo.info.lastName}</p>
+            <p>Phone Number: {userInfo.info.phone}</p>
+            <p>Birthday: {userInfo.info.birthday}</p>
+            <p>Email: {userInfo.info.email}</p>
         </div>
 
 
