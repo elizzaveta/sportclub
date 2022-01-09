@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {API} from "../../../../../index";
 import {useParams} from "react-router-dom";
 import UserInfo from "../../UserInfo";
+import ManageOptions from "../../ManageOptions";
 
 export default function AddSubscription({token}) {
     const {userId} = useParams();
@@ -27,6 +28,8 @@ export default function AddSubscription({token}) {
         ? <h2>Loading</h2>
         :
         <div className="content-wrapper">
+            <h1 className="center">Manage user</h1>
+            <ManageOptions userId ={userId}/>
             <h1>Add Subscription to User</h1>
             <UserInfo userId={userId} token={token}/>
             <h2>Choose Subscription</h2>
