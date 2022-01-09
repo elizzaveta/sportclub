@@ -2,15 +2,17 @@ import React, {useState} from "react";
 import "./Header.css"
 import {Link} from "react-router-dom"
 
-function Header(){
+function Header({ isLoggedIn, isAdmin }){
     const [isMobile, setIsMobile] = useState(false);
     window.addEventListener('resize', (e) => {setIsMobile(window.innerWidth < 991)})
 
 
-    return isMobile ? <MobileHeader /> : <DesktopHeader />
+    return isMobile ?
+        <MobileHeader isAdmin={isAdmin} isLoggedIn={isLoggedIn} />
+        : <DesktopHeader isAdmin={isAdmin} isLoggedIn={isLoggedIn} />
 }
 
-function DesktopHeader(){
+function DesktopHeader({ isLoggedIn, isAdmin }){
     return(
         <header>
             <div className="h-wrapper">
@@ -20,17 +22,37 @@ function DesktopHeader(){
                     <nav className="links">
                         <Link to="/blog" className="link-router link-blue">Blog</Link>
                         <Link to="/subscription" className="link-router link-blue">Subscription</Link>
-                        <Link to="/administration" className="link-router link-blue">Administration</Link>
+                        <DesktopHeaderAdminControls isAdmin={isAdmin}/>
                     </nav>
                 </div>
 
-                <Link to="/login" className="link-router link-blue">Log in</Link>
+                <DesktopHeaderLoginControls isLoggedIn={isLoggedIn}/>
+
+
             </div>
         </header>
     )
 }
 
-function MobileHeader(){
+function DesktopHeaderLoginControls({ isLoggedIn }) {
+    if (isLoggedIn) {
+        return  <Link to="/logout" className="link-router link-blue">Log out</Link>
+    } else {
+        return <div className="right">
+
+            <Link to="/login" className="link-router link-blue">Log in</Link>
+            <Link to="/sign-up" className="link-router link-blue">Sign up</Link>
+        </div>
+    }
+}
+
+function DesktopHeaderAdminControls({ isAdmin }) {
+    if (isAdmin) {
+        return <Link to="/administration" className="link-router link-blue">Administration</Link>;
+    } else return '';
+}
+
+function MobileHeader({ isLoggedIn, isAdmin }){
 
     const [IfMenuOn, setIfMenuOn] = useState(false)
 
