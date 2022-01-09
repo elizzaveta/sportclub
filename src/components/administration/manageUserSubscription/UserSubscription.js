@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./ManageUser.css"
-import {API} from "../../../index";
 import SubscriptionInfoCards from "../../shared/subscription-info-cards/SubscriptionInfoCards";
+import {requestJson} from "../../../requests";
 
 
 export default function UserSubscription({userId, token}) {
@@ -11,15 +11,7 @@ export default function UserSubscription({userId, token}) {
     })
 
     useEffect(() => {
-        fetch(API + 'user-subscriptions/' + userId, {
-            mode: 'cors',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Authorization': `Bearer ${token}`,
-            }
-        })
-            .then(status)
-            .then(json)
+        requestJson(`user-subscriptions/${userId}`, 'GET', token)
             .then(response => {
                 setUserSubscription({
                     subscription: response,
@@ -40,17 +32,4 @@ export default function UserSubscription({userId, token}) {
     return (
         <div>{content}</div>
     )
-}
-
-// i just copypasted it here
-function status(response) {
-    if (response.status >= 200 && response.status < 300) {
-        return Promise.resolve(response)
-    } else {
-        return Promise.reject(new Error(response.statusText))
-    }
-}
-
-function json(response) {
-    return response.json()
 }
