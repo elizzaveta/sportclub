@@ -21,7 +21,12 @@ import FindUser from "./components/administration/manageUserSubscription/FindUse
 import ManageUser from "./components/administration/manageUserSubscription/ManageUser";
 import AddSubscription
     from "./components/administration/manageUserSubscription/options/AddSubscription/AddSubscription";
+
+import EditUserSubscription
+    from "./components/administration/manageUserSubscription/options/EditSubscription/EditSubscription";
+
 import MarkUserVisit from "./components/administration/manageUserSubscription/options/MarkUserVisit/MarkUserVisit";
+
 
 function clearToken() {
     localStorage.removeItem('token');
@@ -43,7 +48,10 @@ function App() {
                 <Route path="/administration/manage-user-subscription" element={isAdmin ? <FindUser/> : 'You must be an admin to do that'}/>
                 <Route path="/administration/manage-user/:userId" element={isAdmin ? <ManageUser token={token}/> : 'You must be an admin to do that'}/>
                 <Route path="/administration/manage-user/add-subscription/:userId" element={isAdmin ? <AddSubscription token={token}/> : 'You must be an admin to do that'}/>
+                <Route path="/administration/manage-user/edit-subscription/:userId" element={isAdmin ? <EditUserSubscription token={token}/> : 'You must be an admin to do that'}/>
+
                 <Route path="/administration/manage-user/mark-visit/:userId" element={isAdmin ? <MarkUserVisit token={token}/> : 'You must be an admin to do that'}/>
+
                 <Route path="/administration" element={isAdmin ? <AdministrationHome/> : 'You must be an admin to do that'}/>
                 <Route path="/login" element={<Login setToken={setToken}/>}/>
                 <Route path="/sign-up" element={<Registration setToken={setToken}/>}/>
