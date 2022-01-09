@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import "./ManageUser.css"
 import {API} from "../../../index";
-import subscription from "../../shared/subscription/Subscription";
 
 
 export default function UserSubscription({userId, token}) {
