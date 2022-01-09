@@ -19,6 +19,8 @@ import Logout from "./components/logout/Logout";
 import jwtDecode from "jwt-decode";
 import FindUser from "./components/administration/manageUserSubscription/FindUser";
 import ManageUser from "./components/administration/manageUserSubscription/ManageUser";
+import AddSubscription
+    from "./components/administration/manageUserSubscription/options/AddSubscription/AddSubscription";
 
 function clearToken() {
     localStorage.removeItem('token');
@@ -38,7 +40,8 @@ function App() {
                 <Route path="/my-subscription" element={token ? <PersonalSubscription token={token}/> : <Login setToken={setToken}/>}/>
                 <Route path="/administration/edit-subscription" element={isAdmin ? <EditSubscription/> : 'You must be an admin to do that'}/>
                 <Route path="/administration/manage-user-subscription" element={isAdmin ? <FindUser/> : 'You must be an admin to do that'}/>
-                <Route path="/administration/manage-user/:userId" element={isAdmin ? <ManageUser/> : 'You must be an admin to do that'}/>
+                <Route path="/administration/manage-user/:userId" element={isAdmin ? <ManageUser token={token}/> : 'You must be an admin to do that'}/>
+                <Route path="/administration/manage-user/add-subscription/:userId" element={isAdmin ? <AddSubscription token={token}/> : 'You must be an admin to do that'}/>
                 <Route path="/administration" element={isAdmin ? <AdministrationHome/> : 'You must be an admin to do that'}/>
                 <Route path="/login" element={<Login setToken={setToken}/>}/>
                 <Route path="/sign-up" element={<Registration setToken={setToken}/>}/>
