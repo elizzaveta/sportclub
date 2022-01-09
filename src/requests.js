@@ -1,6 +1,6 @@
 import {API} from "./index";
 
-export async function request(endpoint, method, token) {
+export async function request(endpoint, method, token, data) {
     const headers = {
         'Access-Control-Allow-Origin': '*',
     }
@@ -8,15 +8,23 @@ export async function request(endpoint, method, token) {
     if (token)
         headers['Authorization'] = `Bearer ${token}`
 
-    return fetch(API + endpoint, {
+    if (data)
+        headers['Content-Type'] = 'application/json'
+
+    const params = {
         mode: 'cors',
         method,
         headers,
-    }).then(status)
+    }
+
+    if (data)
+        params['body'] = JSON.stringify(data)
+
+    return fetch(API + endpoint, params).then(status)
 }
 
-export async function requestJson(endpoint, method, token) {
-    return request(endpoint, method, token).then(data => data.json())
+export async function requestJson(endpoint, method, token, data) {
+    return request(endpoint, method, token, data).then(data => data.json())
 }
 
 function status(response) {
