@@ -43,31 +43,31 @@ export default function Registration({ setToken }) {
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
                 <label>
-                    <p>First name</p>
-                    <input type="text" onChange={e => setFirstName(e.target.value)} />
+                    <label>First name</label>
+                    <input className="login-input"  required="required"  type="text" onChange={e => setFirstName(e.target.value)} />
                 </label>
                 <label>
-                    <p>Last name</p>
-                    <input type="text" onChange={e => setLastName(e.target.value)} />
+                    <label>Last name</label>
+                    <input className="login-input"  required="required"  type="text" onChange={e => setLastName(e.target.value)} />
                 </label>
                 <label>
-                    <p>Phone</p>
-                    <input type="text" onChange={e => setPhone(e.target.value)} />
+                    <label>Phone</label>
+                    <input className="login-input"  required="required"  type="text" onChange={e => setPhone(e.target.value)} />
                 </label>
                 <label>
-                    <p>Email</p>
-                    <input type="text" onChange={e => setEmail(e.target.value)} />
+                    <label>Email</label>
+                    <input className="login-input"  required="required"  type="email" onChange={e => setEmail(e.target.value)} />
                 </label>
                 <label>
-                    <p>Birthday</p>
-                    <input type="text" onChange={e => setBirthday(e.target.value)} />
+                    <label>Birthday</label>
+                    <input className="login-input"  required="required"  type="date" onChange={e => setBirthday(e.target.value)} />
                 </label>
                 <label>
-                    <p>Password</p>
-                    <input type="password" onChange={e => setPassword(e.target.value)}/>
+                    <label>Password</label>
+                    <input className="login-input"  required="required"  type="password" onChange={e => setPassword(e.target.value)}/>
                 </label>
                 <div>
-                    <button type="submit">Submit</button>
+                    <button className="green-max-width-button" type="submit">Submit</button>
                 </div>
             </form>
         </div>

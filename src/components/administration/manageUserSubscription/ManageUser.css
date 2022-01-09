@@ -1,0 +1,32 @@
+.user-subscription-block{
+    margin-bottom: 10px;
+    background: #e4faf7;
+    padding: 20px;
+}
+
+.left-user-subscription-block{
+    margin-bottom: 20px;
+    background: #E4FAEB;
+    padding: 15px;
+}
+.inline-button-wrapper{
+    display: flex;
+    margin-bottom: 50px;
+
+}
+.inline-button{
+    width: 100%;
+    background-color: #4f5265b0;
+    border: none;
+    padding: 10px 4px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0 2px 0 2px;
+
+}
+
+.inline-button a{
+    text-decoration: none;
+    color: white;
+}

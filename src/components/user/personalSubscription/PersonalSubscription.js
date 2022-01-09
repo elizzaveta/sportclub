@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./PersonalSubscription.css"
 import {API} from "../../../index";
 
-export default function PersonalSubscription({ token }) {
+export default function PersonalSubscription({token}) {
 
     const [subscription, setSubscription] = useState(null)
 
@@ -20,9 +20,11 @@ export default function PersonalSubscription({ token }) {
                 setSubscription(response)
                 console.log(response)
             });
-    }, [])
+    }, [token])
 
-    let content =
+    let content = (subscription)
+        ? <h2>You dont have active subscription yet</h2>
+        :
         <div className="content-wrapper">
             <h1 className="center">My current subscription</h1>
             <div className="personal-subscription-block">
@@ -39,7 +41,7 @@ export default function PersonalSubscription({ token }) {
         </div>
 
 
-    return(
+    return (
         <div>{content}</div>
     )
 }
