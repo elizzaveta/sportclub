@@ -55,7 +55,7 @@ function UserDataCard({ user }) {
                 <p>Birthday: {user.birthday}</p>
                 <p>Email: {user.email}</p>
             </div>
-            <QRCode value="1d18a927-137b-4dcf-ac75-768dc3465db7" bgColor="#e4faf7"/>
+            <QRCode value={user.userId} bgColor="#e4faf7"/>
         </div>);
     } else return '';
 }
