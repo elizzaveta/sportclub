@@ -40,7 +40,7 @@ export default function MarkUserVisit({token}) {
             <ManageOptions userId ={userId}/>
             <h2>Take one visit from user subscription:</h2>
             <h2>User Active Subscription(s):</h2>
-            {userSubscription.subscription.map(subscriptionItem =>
+            {userSubscription.subscription.filter(item => item.visitsNumber > 0).map(subscriptionItem =>
                 <div className="take-one-visit-wrapper">
                     <div>
                         <div className="user-subscription-block">
