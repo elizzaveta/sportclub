@@ -59,15 +59,19 @@ function MobileHeader({ isLoggedIn, isAdmin }){
     let menu_details
     let menu_shadow
 
+    const toggleMenu = () => {
+        setIfMenuOn(!IfMenuOn)
+    }
+
     if(IfMenuOn){
         menu_details = <div className="menu-details">
             <nav className="links-in-menu">
-                <Link to="/blog" className="link-router link-dark" onClick={()=>setIfMenuOn(!IfMenuOn)}>Blog</Link>
-                <Link to="/subscription" className="link-router link-dark" onClick={()=>setIfMenuOn(!IfMenuOn)}>Subscription</Link>
-                <Link to="/about-us" className="link-router link-dark" onClick={()=>setIfMenuOn(!IfMenuOn)}>About us</Link>
+                <Link to="/blog" className="link-router link-dark" onClick={toggleMenu}>Blog</Link>
+                <Link to="/subscription" className="link-router link-dark" onClick={toggleMenu}>Subscription</Link>
+                <Link to="/about-us" className="link-router link-dark" onClick={toggleMenu}>About us</Link>
+                <MobileHeaderAdminControls isAdmin={isAdmin} toggleMenu={toggleMenu}/>
+                <MobileHeaderLoginControls isLoggedIn={isLoggedIn} toggleMenu={toggleMenu}/>
             </nav>
-
-            <div className="log-in">Log in</div>
         </div>
         menu_shadow = <div className="menu-shadow" onClick={()=>setIfMenuOn(!IfMenuOn)}>
 
@@ -88,6 +92,24 @@ function MobileHeader({ isLoggedIn, isAdmin }){
             </div>
         </header>
     )
+}
+
+function MobileHeaderLoginControls({ isLoggedIn, toggleMenu }) {
+    if (isLoggedIn) {
+        return  <Link to="/logout" className="link-router link-dark" onClick={toggleMenu}>Log out</Link>
+    } else {
+        return <div className="links-in-menu">
+
+            <Link to="/login" className="link-router link-dark" onClick={toggleMenu}>Log in</Link>
+            <Link to="/sign-up" className="link-router link-dark" onClick={toggleMenu}>Sign up</Link>
+        </div>
+    }
+}
+
+function MobileHeaderAdminControls({ isAdmin, toggleMenu }) {
+    if (isAdmin) {
+        return <Link to="/administration" className="link-router link-dark" onClick={toggleMenu}>Administration</Link>;
+    } else return '';
 }
 
 

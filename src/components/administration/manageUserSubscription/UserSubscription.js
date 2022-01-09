@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./ManageUser.css"
 import {API} from "../../../index";
+import SubscriptionInfoCards from "../../shared/subscription-info-cards/SubscriptionInfoCards";
 
 
 export default function UserSubscription({userId, token}) {
@@ -33,21 +34,7 @@ export default function UserSubscription({userId, token}) {
         :
         <div>
             <h2>User Active Subscription(s):</h2>
-            {userSubscription.subscription.filter(item => item.visitsNumber > 0).map(subscriptionItem =>
-                <div>
-                    <div className="user-subscription-block">
-                        <h3>Subscription:</h3>
-                        <p>Category: {subscriptionItem.subscription.category.name}</p>
-                        <p>Validity: {subscriptionItem.subscription.monthsDuration} month</p>
-                        <p>Visits: {subscriptionItem.subscription.visitsNumber} visits</p>
-                        <p>Start date: {subscriptionItem.startTime}</p>
-                    </div>
-                    <div className="left-user-subscription-block">
-                        <h3>Left visits: {subscriptionItem.visitsNumber}</h3>
-                        <h3>Expires on: {subscriptionItem.endTime}</h3>
-                    </div>
-                </div>
-            )}
+            <SubscriptionInfoCards subscriptions={userSubscription.subscription}/>
         </div>
 
     return (
