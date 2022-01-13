@@ -2,10 +2,11 @@ import React, {useEffect, useState} from "react";
 // import MyCalendar from "../SubscriptionTrack/Calendar"
 import "../../shared/subscription/Subscription.css"
 import {mapSubscriptionResponseIntoObject} from "../../shared/subscription/Subscription";
+import {API} from "../../../index";
 
 
 export default function EditSubscription() {
-    const url = "http://localhost:8080/subscriptions"
+    const url = API + "subscriptions"
     const [subscription, setSubscription] = useState(null)
 
     useEffect(() => {
@@ -279,7 +280,7 @@ function onSaveClick(){
                 price: inputElem.value
             }]
             let json = JSON.stringify(subscriptionItem)
-            put(`http://localhost:8080/subscriptions`, json);
+            put(API + `subscriptions`, json);
         }
     }
 }

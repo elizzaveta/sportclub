@@ -7,7 +7,7 @@ import ManageOptions from "../../ManageOptions";
 export default function AddSubscription({token}) {
     const {userId} = useParams();
 
-    const url = "http://localhost:8080/subscriptions"
+    const url = API + "subscriptions"
     const [subscription, setSubscription] = useState(null)
 
     useEffect(() => {

@@ -7,7 +7,7 @@ import React from 'react'
 import {
     BrowserRouter,
     Routes,
-    Route,
+    Route, HashRouter,
 } from "react-router-dom"
 import PersonalSubscription from "./components/user/personalSubscription/PersonalSubscription";
 import EditSubscription from "./components/administration/subscription/EditSubscription";
@@ -38,7 +38,7 @@ function App() {
     const isAdmin = token ? jwtDecode(token).role === 'ADMIN' : false;
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Header isLoggedIn={!!token} isAdmin={isAdmin}/>
             <Routes>
                 <Route path="/" element={<Landing/>}/>
@@ -58,7 +58,7 @@ function App() {
                 <Route path="/logout" element={<Logout removeToken={removeToken}/>}/>
             </Routes>
             <Footer/>
-        </BrowserRouter>
+        </HashRouter>
 
     );
 

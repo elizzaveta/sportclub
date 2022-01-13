@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {API} from "../../../../../index";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ManageOptions from "../../ManageOptions";
 
 
@@ -30,6 +30,22 @@ export default function MarkUserVisit({token}) {
             });
     }, [token, userId])
 
+    const navigate = useNavigate();
+
+    function handleTakeOneVisitClick(id, userId){
+        // alert(id)
+        fetch(API + 'user-subscriptions/visit/' + id, {
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        })
+            .then(status)
+            .then(json);
+
+
+        navigate('/administration/manage-user/'+userId);
+    }
 
 
     let content = (userSubscription.loading)
@@ -40,7 +56,7 @@ export default function MarkUserVisit({token}) {
             <ManageOptions userId ={userId}/>
             <h2>Take one visit from user subscription:</h2>
             <h2>User Active Subscription(s):</h2>
-            {userSubscription.subscription.map(subscriptionItem =>
+            {userSubscription.subscription.filter(item => item.visitsNumber > 0).map(subscriptionItem =>
                 <div className="take-one-visit-wrapper">
                     <div>
                         <div className="user-subscription-block">
@@ -81,16 +97,3 @@ function json(response) {
     return response.json()
 }
 
-
-function handleTakeOneVisitClick(id, userId){
-    alert(id)
-    fetch(API + 'user-subscriptions/visit/' + id, {
-        mode: 'cors',
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        }
-    })
-        .then(status)
-        .then(json);
-    window.location.pathname='/administration/manage-user/'+userId;
-}

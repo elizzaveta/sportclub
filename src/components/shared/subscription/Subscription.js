@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
 // import MyCalendar from "../SubscriptionTrack/Calendar"
 import "./Subscription.css"
+import {API} from "../../../index";
 
 
 function Subscription() {
 
-    const url = "http://localhost:8080/subscriptions"
+    const url = API + "subscriptions"
     const [subscription, setSubscription] = useState(null)
 
     useEffect(() => {

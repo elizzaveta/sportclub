@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+export const API = "https://intense-springs-79242.herokuapp.com/";
+
 ReactDOM.render(
   <React.StrictMode>
 
@@ -17,4 +19,3 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-export const API = "http://localhost:8080/";
